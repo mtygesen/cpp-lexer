@@ -5,7 +5,7 @@ Example of lexer implementation in C++
 ```bash
 clang++-17 lexer.cpp -o lexer
 ```
-./lexer example.lang
 #### Usage
 ```bash
+./lexer example.lang
 ```
