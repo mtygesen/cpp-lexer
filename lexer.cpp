@@ -65,8 +65,10 @@ int Lexer::getToken() {
 }
 
 int main(int argc, char **argv) {
-    if (argc < 2) {
-        std::cout << "Usage: ./lexer <file>\n";  
+    std::string helpStr = "Usage ./" + arv[1] + " <file>\n"
+   
+    if (argc < 2 || argv[1] == "-h" || argv[1] == "--help") {
+        std::cout << helpStr;  
         return 0;
     }
 
