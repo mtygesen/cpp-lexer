@@ -1,5 +1,36 @@
 #include "lexer.hpp"
 
+int main(int argc, char **argv) {
+    std::string helpStr = "Usage: " + std::string(argv[0]) + " <file>\n";
+   
+    std::string fileName;
+
+    if (argc < 2 || std::string(argv[1]) == "-h" || std::string(argv[1]) == "--help") {
+        std::cout << helpStr;  
+        return 0;
+    }
+
+    Lexer lexer(argv[1]);
+
+    int lastToken = 0;
+
+    std::string printStr;
+
+    do {
+        lastToken = lexer.getToken();
+        
+        if (lastToken < 0) {
+            printStr += lexer.tokenNames[lastToken];
+        } else {
+            printStr += lastToken;
+        }
+
+        printStr += ' ';
+    } while (lastToken != Lexer::TokEof);
+
+    std::cout << printStr << '\n';
+}
+
 Lexer::Lexer(std::string fileName) {
     file = std::ifstream(std::filesystem::path(fileName));
     if (!file.is_open()) {
@@ -62,35 +93,4 @@ int Lexer::getToken() {
     lastChar = file.get();
 
     return thisChar;
-}
-
-int main(int argc, char **argv) {
-    std::string helpStr = "Usage: " + std::string(argv[0]) + " <file>\n";
-   
-    std::string fileName;
-
-    if (argc < 2 || std::string(argv[1]) == "-h" || std::string(argv[1]) == "--help") {
-        std::cout << helpStr;  
-        return 0;
-    }
-
-    Lexer lexer(argv[1]);
-
-    int lastToken = 0;
-
-    std::string printStr;
-
-    do {
-        lastToken = lexer.getToken();
-        
-        if (lastToken < 0) {
-            printStr += lexer.tokenNames[lastToken];
-        } else {
-            printStr += lastToken;
-        }
-
-        printStr += ' ';
-    } while (lastToken != Lexer::TokEof);
-
-    std::cout << printStr << '\n';
 }
