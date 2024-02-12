@@ -85,10 +85,8 @@ int main(int argc, char **argv) {
             printStr += lastToken;
         }
 
-        printStr += ", ";
+        printStr += ' ';
     } while (lastToken != Lexer::TokEof);
-
-    printStr = printStr.substr(0, printStr.length() - 2);
 
     std::cout << printStr << '\n';
 }
