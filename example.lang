@@ -1,0 +1,19 @@
+def main(argc, argv) {
+    let x = 10; let y = 15;
+
+    if (x == y) {
+        let z = x + y;
+    } else {
+        let z = 0;
+    }
+    
+    for (int i = 0; i < 10; ++i) {
+        let b = i;
+    }
+    
+    while (true) {
+        let j = 30;
+    }
+    
+    return;
+}
