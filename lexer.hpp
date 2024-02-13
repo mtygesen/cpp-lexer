@@ -37,7 +37,7 @@ class Lexer {
             TokDivide = -22,
             TokComma = -23,
             TokLessThan = -24,
-            TokMoreThan = -25
+            TokMoreThan = -25,
         };
 
         std::unordered_map<std::string, Token> keywords = {
@@ -65,7 +65,7 @@ class Lexer {
             {'/', TokDivide},
             {',', TokComma},
             {'<', TokLessThan},
-            {'>', TokMoreThan}
+            {'>', TokMoreThan},
         };
 
         std::unordered_map<int, std::string> tokenNames = {

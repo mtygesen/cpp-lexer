@@ -41,7 +41,13 @@ Lexer::Lexer(std::string fileName) {
 }
 
 int Lexer::getToken() {
-    while (isspace(lastChar)) lastChar = file.get();
+    while (isspace(lastChar) || lastChar == '#') {
+        if (lastChar == '#') {
+            file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        }
+        
+        lastChar = file.get();
+    }
 
     if (isalpha(lastChar)) {
         identifierStr = lastChar;

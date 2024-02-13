@@ -1,13 +1,14 @@
+# This is a comment
 def main(argc, argv) {
     let x = 10; let y = 15;
 
-    if (x == y) {
+    if (false) {
         let z = x + y;
     } else {
         let z = 0;
     }
     
-    for (int i = 0; i < 10; ++i) {
+    for (int i = 0; i < 10; i += 1) {
         let b = i;
     }
     
