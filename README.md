@@ -1,5 +1,5 @@
 # C++ Lexer
-Example of lexer implementation in C++
+Example of lexer implementation in C++ 17
 
 #### Compile
 ```bash
