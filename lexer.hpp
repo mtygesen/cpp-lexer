@@ -5,7 +5,7 @@
 #include <fstream>
 #include <filesystem>
 #include <cstdlib>
-#include <map>
+#include <unordered_map>
 
 class Lexer {
     public:
@@ -13,33 +13,87 @@ class Lexer {
         int getToken();
 
         enum Token {
-            TokIdentifier = -1,
-            TokNumber = -2,
-            TokIf = -3,
-            TokEof = -4,
-            TokLet = -5,
-            TokElse = -6,
-            TokFor = -7,
-            TokWhile = -8,
-            TokTrue = -9,
-            TokFalse = -10,
-            TokReturn = -11,
-            TokDef = -12,
+            TokDef = -1,
+            TokElse = -2,
+            TokEof = -3,
+            TokFalse = -4,
+            TokFor = -5,
+            TokIdentifier = -6,
+            TokIf = -7,
+            TokLet = -8,
+            TokNumber = -9,
+            TokParClose = -10,
+            TokParOpen = -11,
+            TokReturn = -12,
+            TokSemiCol = -13,
+            TokTrue = -14,
+            TokWhile = -15,
+            TokBrackClose = -16,
+            TokBrackOpen = -17,
+            TokAssign = -18,
+            TokPlus = -19,
+            TokMinus = -20,
+            TokMultiply = -21,
+            TokDivide = -22,
+            TokComma = -23,
+            TokLessThan = -24,
+            TokMoreThan = -25
         };
 
-        std::map<int, std::string> tokenNames = {
-            {TokIdentifier, "identifier"},
-            {TokNumber, "number"},
-            {TokIf, "if"},
-            {TokEof, "eof"},
-            {TokLet, "let"},
-            {TokElse, "else"},
-            {TokFor, "for"},
-            {TokWhile, "while"},
-            {TokTrue, "true"},
-            {TokFalse, "false"},
-            {TokReturn, "return"},
-            {TokDef, "def"},
+        std::unordered_map<std::string, Token> keywords = {
+            {"if", TokIf},
+            {"else", TokElse},
+            {"let", TokLet},
+            {"for", TokFor},
+            {"while", TokWhile},
+            {"true", TokTrue},
+            {"false", TokFalse},
+            {"return", TokReturn},
+            {"def", TokDef}
+        };
+
+        std::unordered_map<char, Token> specialChars = {
+            {';', TokSemiCol},
+            {'(', TokParOpen},
+            {')', TokParClose},
+            {'{', TokBrackOpen},
+            {'}', TokBrackClose},
+            {'=', TokAssign},
+            {'+', TokPlus},
+            {'-', TokMinus},
+            {'*', TokMultiply},
+            {'/', TokDivide},
+            {',', TokComma},
+            {'<', TokLessThan},
+            {'>', TokMoreThan}
+        };
+
+        std::unordered_map<int, std::string> tokenNames = {
+            {TokDef, "TokDef"},
+            {TokElse, "TokElse"},
+            {TokEof, "TokEof"},
+            {TokFalse, "TokFalse"},
+            {TokFor, "TokFor"},
+            {TokIdentifier, "TokIdentifier"},
+            {TokIf, "TokIf"},
+            {TokLet, "TokLet"},
+            {TokNumber, "TokNumber"},
+            {TokParClose, "TokParClose"},
+            {TokParOpen, "TokParOpen"},
+            {TokReturn, "TokReturn"},
+            {TokSemiCol, "TokSemiCol"},
+            {TokTrue, "TokTrue"},
+            {TokWhile, "TokWhile"},
+            {TokBrackClose, "TokBrackClose"},
+            {TokBrackOpen, "TokBrackOpen"},
+            {TokAssign, "TokAssign"},
+            {TokPlus, "TokPlus"},
+            {TokMinus, "TokMinus"},
+            {TokMultiply, "TokMultiply"},
+            {TokDivide, "TokDivide"},
+            {TokComma, "TokComma"},
+            {TokLessThan, "TokLessThan"},
+            {TokMoreThan, "TokMoreThan"}
         };
 
     private:

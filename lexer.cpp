@@ -18,11 +18,12 @@ int main(int argc, char **argv) {
 
     do {
         lastToken = lexer.getToken();
-        
+
         if (lastToken < 0) {
             printStr += lexer.tokenNames[lastToken];
         } else {
-            printStr += lastToken;
+            std::cerr << "Unrecognized token: '" << static_cast<char>(lastToken) << "'\n";
+            exit(EXIT_FAILURE);
         }
 
         printStr += ' ';
@@ -49,30 +50,13 @@ int Lexer::getToken() {
             identifierStr += lastChar;
         }
 
-        if (identifierStr == "if") {
-            return TokIf;
-        } else if (identifierStr == "else") {
-            return TokElse;
-        } else if (identifierStr == "let") {
-            return TokLet;
-        } else if (identifierStr == "for") {
-            return TokFor;
-        } else if (identifierStr == "while") {
-            return TokWhile;
-        } else if (identifierStr == "true") {
-            return TokTrue;
-        } else if (identifierStr == "false") {
-            return TokFalse;
-        } else if (identifierStr == "return") {
-            return TokReturn;
-        } else if (identifierStr == "def") {
-            return TokDef;
+        std::unordered_map<std::string, Token>::iterator searchKeyword = keywords.find(identifierStr);
+        if (searchKeyword != keywords.end()) {
+            return searchKeyword->second;
         }
 
         return TokIdentifier;
-    }
-
-    if (isdigit(lastChar) || lastChar == '.') {
+    } else if (isdigit(lastChar) || lastChar == '.') {
         std::string numStr;
 
         do {
@@ -83,11 +67,15 @@ int Lexer::getToken() {
         numVal = strtod(numStr.c_str(), 0);
 
         return TokNumber;
+    } else if (lastChar == EOF) {
+        return TokEof;
     }
 
-    if (lastChar == EOF) {
-        return TokEof;
-    }   
+    std::unordered_map<char, Token>::iterator searchSpecialChar = specialChars.find(lastChar);
+    if (searchSpecialChar != specialChars.end()) {
+        lastChar = file.get();
+        return searchSpecialChar->second;
+    }
 
     int thisChar = lastChar;
     lastChar = file.get();
